@@ -1,7 +1,6 @@
 import { defineSchema, defineTable } from "convex/server";
 import { v } from 'convex/values';
 
-
 export default defineSchema({
     users: defineTable({
         name: v.string(),
@@ -11,19 +10,16 @@ export default defineSchema({
     }).index("by_clerk_id", ["clerkId"]),
 
     plans: defineTable({
-        userId: v.id("users"),
+        userId: v.string(),
         name: v.string(),
         workoutPlan: v.object({
-            shcedule: v.array(v.string()),
+            schedule: v.array(v.string()),
             exercises: v.array(v.object({
                 day: v.string(),
                 routines: v.array(v.object({
                     name: v.string(),
-                    sets: v.optional(v.number()),
-                    reps: v.optional(v.number()),
-                    duration: v.optional(v.string()),
-                    description: v.optional(v.string()),
-                    exercises: v.optional(v.array(v.string())),
+                    sets: v.number(),
+                    reps: v.number(),
                 }))
             })),
         }),
